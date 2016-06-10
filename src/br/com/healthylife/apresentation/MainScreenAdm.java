@@ -81,7 +81,7 @@ public class MainScreenAdm extends javax.swing.JFrame {
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenuItemLeave = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuExhibitionEmployee = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMExhibitionClient = new javax.swing.JMenuItem();
         jMenuItem20 = new javax.swing.JMenuItem();
@@ -278,8 +278,13 @@ public class MainScreenAdm extends javax.swing.JFrame {
 
         jMenu2.setText("Exibir");
 
-        jMenuItem4.setText("Funcionários");
-        jMenu2.add(jMenuItem4);
+        jMenuExhibitionEmployee.setText("Funcionários");
+        jMenuExhibitionEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuExhibitionEmployeeActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuExhibitionEmployee);
 
         jMenuItem5.setText("Médicos");
         jMenu2.add(jMenuItem5);
@@ -390,6 +395,10 @@ public class MainScreenAdm extends javax.swing.JFrame {
         jDesktopPane1.add(new ExhibitionClientIF()).setVisible(true);
     }//GEN-LAST:event_jMExhibitionClientActionPerformed
 
+    private void jMenuExhibitionEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuExhibitionEmployeeActionPerformed
+       jDesktopPane1.add(new ExhibitionEmployeeIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuExhibitionEmployeeActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jAbout;
     private javax.swing.JDesktopPane jDesktopPane1;
@@ -416,11 +425,11 @@ public class MainScreenAdm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuExhibitionEmployee;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem20;
     private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;

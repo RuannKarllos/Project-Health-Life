@@ -1,5 +1,5 @@
 
-package br.com.healthylife.dao;
+package br.com.healthylife.util;
 
 
 public class ValidateCpf {

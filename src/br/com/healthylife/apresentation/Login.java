@@ -5,7 +5,13 @@
  */
 package br.com.healthylife.apresentation;
 
+import br.com.healthylife.controller.ControllerAdm;
+import br.com.healthylife.controller.ControllerClient;
+import br.com.healthylife.controller.ControllerEmployee;
 import br.com.healthylife.util.Constants;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -37,7 +43,7 @@ public class Login extends javax.swing.JFrame {
         jPassword_Text = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Healthy Life Program");
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -133,15 +139,32 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_leaveActionPerformed
 
     private void get_InActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get_InActionPerformed
-        String password = "";
-        
-        for (int i = 0; i < jPassword_Text.getPassword().length; i++) {
-            password += jPassword_Text.getPassword()[i];
+            String password = "";
+            
+            for (int i = 0; i < jPassword_Text.getPassword().length; i++) {
+                password += jPassword_Text.getPassword()[i];
+            }
+            
+            ControllerAdm ca = new ControllerAdm();
+            ControllerClient cc = new ControllerClient();
+            ControllerEmployee ce = new ControllerEmployee();
+            
+        try {
+            if (ca.checkLogin(jUsername_Text.getText(), password)) {
+                this.dispose();
+            } else if (cc.checkLogin(jUsername_Text.getText(), password)) {
+                this.dispose();
+            } else if (ce.checkLogin(jUsername_Text.getText(), password)){
+               this.dispose();
+            } else {
+                 JOptionPane.showMessageDialog(this, Constants.LOGIN_INVALID);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        if (jUsername_Text.getText().equals("0000") && password.equals("0000")) {
-            new MainScreenAdm(this).setVisible(true);
-        }
         
     }//GEN-LAST:event_get_InActionPerformed
 

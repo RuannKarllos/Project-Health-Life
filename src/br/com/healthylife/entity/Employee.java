@@ -1,22 +1,28 @@
 package br.com.healthylife.entity;
 
-public class Employee extends Manager {
+import java.io.Serializable;
 
-	public Employee(String name, String CPF, String dateOfBorn, int age, String sex, String email, String phoneNumber) {
-		super(name, CPF, dateOfBorn, age, sex, email, phoneNumber);
+public class Employee extends Manager implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
 
-	}
-	
-	@Override
-	public void registerClient(Client c) {
-		super.registerClient(c);
-	}
-	
-	@Override
-	public void registerMedic(Medical m) {
-		// TODO Auto-generated method stub
-		super.registerMedic(m);
-	}
-	
-	
+    private String password;
+    
+    public Employee(String name, String CPF, int age, String sex, String email, String phoneNumber, String password) {
+        super(name, CPF, age, sex, email, phoneNumber);
+
+    }
+
+    @Override
+    public String getID() {
+        return getCPF();
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

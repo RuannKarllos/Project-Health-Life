@@ -5,9 +5,15 @@
  */
 package br.com.healthylife.apresentation;
 
+import br.com.healthylife.controller.ControllerClient;
 import br.com.healthylife.dao.Dao;
 import br.com.healthylife.entity.Client;
 import br.com.healthylife.util.Factory;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -46,17 +52,17 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTPhone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jComboBoxSex = new javax.swing.JComboBox<String>();
+        jComboBoxSex = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jTAge = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTDueDate = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jPassword = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jButtonNew = new javax.swing.JButton();
         jButtonRegistration = new javax.swing.JButton();
         jButtonLeave = new javax.swing.JButton();
+        jFormattedTDueDate = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -71,7 +77,7 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
 
         jLabel6.setText("Sexo:");
 
-        jComboBoxSex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
         jComboBoxSex.setSelectedIndex(-1);
 
         jLabel7.setText("Idade:");
@@ -103,6 +109,9 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
             }
         });
 
+        jFormattedTDueDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/MM"))));
+        jFormattedTDueDate.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,18 +142,20 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
                                 .addComponent(jComboBoxSex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jTAge, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jTDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(86, 86, 86)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel10)
-                                .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
                                 .addComponent(jTPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(26, 26, 26)))
+                            .addGap(26, 26, 26))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jFormattedTDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10)
+                                .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addComponent(jButtonNew)
@@ -152,7 +163,7 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
                         .addComponent(jButtonRegistration)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonLeave)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,8 +200,8 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
@@ -214,7 +225,7 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
         jPassword.setText(null);
         jTAge.setText(null);
         jTCPF.setText(null);
-        jTDueDate.setText(null);
+        jFormattedTDueDate.setText(null);
         jTEmail.setText(null);
         jTName.setText(null);
         jTPhone.setText(null);
@@ -223,7 +234,8 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
 
     private void jButtonRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrationActionPerformed
 
-        
+        try {
+
             String name = jTName.getText();
             int age = Integer.parseInt(jTAge.getText());
             String CPF = jTCPF.getText();
@@ -235,16 +247,21 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
                 password += jPassword.getPassword()[i];
             }
 
-            String dueDate = jTDueDate.getText();
+            String dueDate = jFormattedTDueDate.getText();
             String phone = jTPhone.getText();
-        
-        
-        try {
-            Client c = new Client(name, CPF, "", age, sex, email, phone);
-            Dao<Client> dc = Factory.getDao(Client.class);
-            dc.update(c);
-        } catch (NullPointerException e) {
+            
+            ControllerClient controlC = new ControllerClient();
+            
+            controlC.registerClient(name, CPF, age, sex, email, phone, name, password);
+            
+            JOptionPane.showMessageDialog(this, "Usuário cadastrado com sucesso!");
+            
+            this.dispose();
+            
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, e.toString());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Verifique se todos os campos estão preenchidos!");
         }
 
 
@@ -255,6 +272,7 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNew;
     private javax.swing.JButton jButtonRegistration;
     private javax.swing.JComboBox<String> jComboBoxSex;
+    private javax.swing.JFormattedTextField jFormattedTDueDate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -267,9 +285,10 @@ public class RegistrationScreenClient extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPassword;
     private javax.swing.JTextField jTAge;
     private javax.swing.JTextField jTCPF;
-    private javax.swing.JTextField jTDueDate;
     private javax.swing.JTextField jTEmail;
     private javax.swing.JTextField jTName;
     private javax.swing.JTextField jTPhone;
     // End of variables declaration//GEN-END:variables
+
+    
 }

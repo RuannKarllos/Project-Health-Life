@@ -2,8 +2,8 @@ package br.com.healthylife.structures;
 
 
 
-import br.com.healthylife.entity.Entity;
 import br.com.healthylife.entity.Person;
+import br.com.healthylife.entity.Entity;
 
 
 public class Nodo {
