@@ -5,7 +5,11 @@
  */
 package br.com.healthylife.apresentation;
 
+import br.com.healthylife.controller.ControllerMedic;
 import br.com.healthylife.util.Constants;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,10 +45,8 @@ public class RegistrationScreenMedicIF extends javax.swing.JInternalFrame {
         jButtonRegistration = new javax.swing.JButton();
         jComboBoxSex = new javax.swing.JComboBox<>();
         jTEmail = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         jButtonLeave = new javax.swing.JButton();
         jTName = new javax.swing.JTextField();
-        jTDateOfBorn = new javax.swing.JTextField();
         jPassword = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -71,11 +73,14 @@ public class RegistrationScreenMedicIF extends javax.swing.JInternalFrame {
         jLabel9.setText("Senha:");
 
         jButtonRegistration.setText("Cadastrar");
+        jButtonRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrationActionPerformed(evt);
+            }
+        });
 
         jComboBoxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
         jComboBoxSex.setSelectedIndex(-1);
-
-        jLabel4.setText("Data de Nascimento: ");
 
         jButtonLeave.setText("Sair");
         jButtonLeave.addActionListener(new java.awt.event.ActionListener() {
@@ -97,16 +102,9 @@ public class RegistrationScreenMedicIF extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 173, Short.MAX_VALUE)
-                        .addComponent(jButtonNew)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRegistration)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonLeave))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,25 +121,24 @@ public class RegistrationScreenMedicIF extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jTCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTDateOfBorn))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addGap(90, 90, 90)
-                                            .addComponent(jLabel4)))
+                                    .addComponent(jTCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
                                     .addComponent(jLabel8)
                                     .addComponent(jTCRM, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(99, 99, 99)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jTPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9)
-                                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                    .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(jButtonNew)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRegistration)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonLeave)))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,39 +174,69 @@ public class RegistrationScreenMedicIF extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTDateOfBorn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                        .addComponent(jTCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNew)
                     .addComponent(jButtonRegistration)
                     .addComponent(jButtonLeave))
-                .addGap(20, 20, 20))
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
-        jPassword.setText("");
-        jTAge.setText("");
-        jTCPF.setText("");
-        jTDateOfBorn.setText("");
-        jTEmail.setText("");
-        jTName.setText("");
-        jTPhone.setText("");
-        jTCRM.setText("");
+        jPassword.setText(null);
+        jTAge.setText(null);
+        jTCPF.setText(null);
+        jTEmail.setText(null);
+        jTName.setText(null);
+        jTPhone.setText(null);
+        jTCRM.setText(null);
         jComboBoxSex.setSelectedIndex(-1);
     }//GEN-LAST:event_jButtonNewActionPerformed
 
     private void jButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeaveActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonLeaveActionPerformed
+
+    private void jButtonRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrationActionPerformed
+        try {
+            String name = jTName.getText();
+            String CPF = jTCPF.getText();
+
+            int age = 0;
+            if (jTAge.getText().length() > 0) {
+                age = Integer.parseInt(jTAge.getText());
+            } else {
+                throw new NumberFormatException("Campos vazios ou preenchidos incorretamentes!");
+            }
+
+            int CRM = 0;
+            if (jTCRM.getText().length() > 3) {
+                CRM = Integer.parseInt(jTCRM.getText());
+            } else {
+                throw new NumberFormatException("Campos vazios ou preenchidos incorretamentes!");
+            }
+            
+            String email = jTEmail.getText();
+            String sex = jComboBoxSex.getItemAt(jComboBoxSex.getSelectedIndex());
+            String phone = jTPhone.getText();
+            String password = convertPassword(jPassword.getPassword());
+
+            ControllerMedic cm = new ControllerMedic();
+
+            cm.register(name, CPF, age, sex, email, phone, CRM, password);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonRegistrationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,7 +247,6 @@ public class RegistrationScreenMedicIF extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -230,9 +256,19 @@ public class RegistrationScreenMedicIF extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTAge;
     private javax.swing.JTextField jTCPF;
     private javax.swing.JTextField jTCRM;
-    private javax.swing.JTextField jTDateOfBorn;
     private javax.swing.JTextField jTEmail;
     private javax.swing.JTextField jTName;
     private javax.swing.JTextField jTPhone;
     // End of variables declaration//GEN-END:variables
+
+    private String convertPassword(char[] password) {
+        String str = null;
+
+        for (int i = 0; i < password.length; i++) {
+            str += password[i];
+        }
+
+        return str;
+    }
+
 }

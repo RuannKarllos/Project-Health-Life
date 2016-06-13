@@ -22,11 +22,11 @@ import java.io.ObjectInputStream;
 public class ControllerEmployee {
 
     IDao<Employee> de = Factory.getDao(Employee.class);
-    
+    Employee e;
     MainScreenEmployee msE = new MainScreenEmployee();
-    
+
     public boolean checkLogin(String login, String password) throws FileNotFoundException, IOException, ClassNotFoundException {
-        String folder = "\\Projeto\\Client";
+        String folder = "Employee";
 
         File file = new File(folder, login + ".data");
 
@@ -45,27 +45,50 @@ public class ControllerEmployee {
         return false;
     }
 
-    public void register(String name, String CPF, int age, String sex, String email, String phoneNumber, String password) {
-        Employee e = new Employee(name, CPF, age, sex, email, phoneNumber, password);
-
-        de.insert(e);
+    public void register(String name, String CPF, int age, String sex, String email, String phoneNumber, String password) throws Exception {
+        e = new Employee(name, CPF, age, sex, email, phoneNumber, password);
+        
+        String folder = "Employee";
+        File file = new File(folder, CPF + ".data");
+        
+        if (!checkFields(name, CPF, age, sex, email, phoneNumber, password)) {
+            if (!file.exists()) {
+                de.insert(e);
+            } else {
+                throw new Exception("Funcionário já foi cadastrado!");
+            }
+        } else {
+            throw new Exception("Campos vazios ou preenchidos incorretamentes!");
+        }
     }
 
     public void update(String name, String CPF, int age, String sex, String email, String phoneNumber, String password) throws Exception {
-        Employee e = new Employee(name, CPF, age, sex, email, phoneNumber, password);
-
-        if (CPF.equals(de.search(CPF).getID())) {
-            de.update(e);
+        e = new Employee(name, CPF, age, sex, email, phoneNumber, password);
+        
+        String folder = "Employee";
+        File file = new File(folder, CPF + ".data");
+        
+        if (!checkFields(name, CPF, age, sex, email, phoneNumber, password)) {
+            if (file.exists()) {
+                de.update(e);
+            } else {
+                throw new Exception("Funcionário não foi cadastrado!");
+            }
         } else {
-            throw new Exception("O usuário não se encontra cadastrado!");
+            throw new Exception("Campos vazios ou preenchidos incorretamentes!");
         }
     }
-    
+
     public void delete(String id) throws Exception {
-        if (id.equals(de.search(id).getID())) {
-            de.delete(id);
-        } else {
-            throw new Exception("O usuário desejado não se encontra cadastrado!");
-        }
+        de.delete(id);
+    }
+
+    public Employee search(String id) {
+        return (Employee) de.search(id);
+    }
+
+    private boolean checkFields(String name, String CPF, int age, String sex, String email, String phoneNumber, String password) {
+        return name.length() <= 0 || CPF.length() <= 0 || age >= 18 || sex.length() <= 0 
+                || email.length() <= 0 || phoneNumber.length() <= 0 || password.length() <= 0;
     }
 }

@@ -6,6 +6,7 @@
 package br.com.healthylife.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,24 +15,14 @@ import java.util.Date;
  */
 public class Consultation extends Entity implements Serializable {
 
-    private String cod;
     private String patientName;
     private String hospitalName;
     private Date consultationDate;
-
-    public Consultation(String cod, String patientName, String hospitalName, Date consultationDate) {
-        this.cod = cod;
+ 
+    public Consultation(String patientName, String hospitalName, Date consultationDate) {
         this.patientName = patientName;
         this.hospitalName = hospitalName;
-        this.consultationDate = consultationDate;
-    }
-
-    public String getCod() {
-        return cod;
-    }
-
-    public void setCod(String cod) {
-        this.cod = cod;
+        this.consultationDate = consultationDate;       
     }
 
     public String getPatientName() {
@@ -60,6 +51,6 @@ public class Consultation extends Entity implements Serializable {
 
     @Override
     public String getID() {
-        return cod;
+        return patientName;
     }
 }

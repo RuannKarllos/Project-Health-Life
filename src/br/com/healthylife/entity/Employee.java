@@ -10,7 +10,7 @@ public class Employee extends Manager implements Serializable {
     
     public Employee(String name, String CPF, int age, String sex, String email, String phoneNumber, String password) {
         super(name, CPF, age, sex, email, phoneNumber);
-
+        this.password = password;
     }
 
     @Override

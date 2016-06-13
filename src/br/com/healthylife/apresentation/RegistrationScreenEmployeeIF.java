@@ -5,9 +5,10 @@
  */
 package br.com.healthylife.apresentation;
 
-import br.com.healthylife.controller.ControllerAdm;
 import br.com.healthylife.controller.ControllerEmployee;
 import br.com.healthylife.util.Constants;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,7 +42,7 @@ public class RegistrationScreenEmployeeIF extends javax.swing.JInternalFrame {
         jTCPF = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jComboBoxSex = new javax.swing.JComboBox<>();
+        jComboBoxSex = new javax.swing.JComboBox<String>();
         jTName = new javax.swing.JTextField();
         jPassword = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
@@ -77,7 +78,7 @@ public class RegistrationScreenEmployeeIF extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Senha:");
 
-        jComboBoxSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jComboBoxSex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
         jComboBoxSex.setSelectedIndex(-1);
 
         jLabel7.setText("Idade:");
@@ -120,7 +121,7 @@ public class RegistrationScreenEmployeeIF extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jTAge, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jComboBoxSex, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBoxSex, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
                         .addComponent(jButtonNew)
@@ -163,7 +164,7 @@ public class RegistrationScreenEmployeeIF extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonNew)
                     .addComponent(jButtonRegister)
@@ -196,11 +197,7 @@ public class RegistrationScreenEmployeeIF extends javax.swing.JInternalFrame {
             String email = jTEmail.getText();
             String sex = jComboBoxSex.getItemAt(jComboBoxSex.getSelectedIndex());
             String phoneNumber = jTPhone.getText();
-            String password = "";
-
-            for (int i = 0; i < jPassword.getPassword().length; i++) {
-                password += jPassword.getPassword()[i];
-            }
+            String password = convertPassword(jPassword.getPassword());
             
             ControllerEmployee ce = new ControllerEmployee();
             
@@ -208,8 +205,12 @@ public class RegistrationScreenEmployeeIF extends javax.swing.JInternalFrame {
             
             JOptionPane.showMessageDialog(this, Constants.REGISTER_DONE);
             
+            this.dispose();
+            
         } catch (NumberFormatException | NullPointerException e) {
             JOptionPane.showMessageDialog(this, Constants.REGISTER_ERRO_USER);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
@@ -233,4 +234,14 @@ public class RegistrationScreenEmployeeIF extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTName;
     private javax.swing.JTextField jTPhone;
     // End of variables declaration//GEN-END:variables
+
+    private String convertPassword(char[] password) {
+        String str = null;
+
+        for (int i = 0; i < password.length; i++) {
+            str += password[i];
+        }
+
+        return str;
+    }
 }

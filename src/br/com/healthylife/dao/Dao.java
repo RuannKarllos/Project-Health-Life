@@ -112,7 +112,7 @@ public class Dao< J extends Entity> implements IDao<J> {
     }
 
     private File getFolder() {
-        String getClassName = "\\Projeto\\" + currentClass.getSimpleName();
+        String getClassName = currentClass.getSimpleName();
 
         File file = new File(getClassName);
 

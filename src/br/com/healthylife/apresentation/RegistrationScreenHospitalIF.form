@@ -76,7 +76,7 @@
                                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jTNeighborhood" alignment="1" min="-2" pref="141" max="-2" attributes="0"/>
+                                      <Component id="jTDistrict" alignment="1" min="-2" pref="141" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -120,7 +120,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Component id="jTNeighborhood" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTDistrict" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -168,7 +168,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTAdress">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTNeighborhood">
+    <Component class="javax.swing.JTextField" name="jTDistrict">
     </Component>
     <Component class="javax.swing.JTextField" name="jTCodeNumber">
     </Component>
@@ -186,6 +186,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRegistrationActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonNew">
       <Properties>

@@ -8,7 +8,9 @@ package br.com.healthylife.controller;
 import br.com.healthylife.dao.IDao;
 import br.com.healthylife.entity.Consultation;
 import br.com.healthylife.util.Factory;
+import java.io.File;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,27 +20,53 @@ public class ControllerConsultation {
 
     IDao<Consultation> dc = Factory.getDao(Consultation.class);
 
-    public void registerConsult(String cod, String patientName, String hospitalName, Date consultationDate) {
-        Consultation c = new Consultation(cod, patientName, hospitalName, consultationDate);
+    public void registerConsult(String patientName, String hospitalName, Date consultationDate) throws Exception {
+        Consultation c = new Consultation(patientName, hospitalName, consultationDate);
 
-        dc.insert(c);
+        String folder = "Consultation";
+        File file = new File(folder, patientName + ".data");
+        
+        if (!checkFields(patientName, hospitalName, consultationDate)) {
+            if (!file.exists()) {
+                dc.insert(c);
+            } else {
+                throw new Exception("Consulta já marcada!");
+            }
+        } else {
+            throw new NullPointerException("Preencha todos os campos!");
+        }
     }
 
-    public void updateConsult(String cod, String patientName, String hospitalName, Date consultationDate) throws Exception {
-        Consultation c = new Consultation(cod, patientName, hospitalName, consultationDate);
+    public void updateConsult(String patientName, String hospitalName, Date consultationDate) throws Exception {
+        Consultation c = new Consultation(patientName, hospitalName, consultationDate);
 
-        if (cod.equals(dc.search(cod).getID())) {
-            dc.update(c);
+        String folder = "Consultation";
+        File file = new File(folder, patientName + ".data");
+        
+        if (!checkFields(patientName, hospitalName, consultationDate)) {
+            if (file.exists()) {
+                dc.update(c);
+            } else {
+                throw new Exception("Consulta não marcada!");
+            }
         } else {
-            throw new Exception("O código de consulta não existe!");
+            throw new NullPointerException("Preencha todos os campos!");
         }
+    }
+
+    public Consultation search(String id) {
+        return (Consultation) dc.search(id);
     }
     
-    public void cancelColsunt(String cod) throws Exception {
-        if (cod.equals(dc.search(cod).getID())) {
-            dc.delete(cod);
-        } else {
-            throw new Exception("Código inexistente!");
-        }
+    public void cancelColsunt(String id) throws Exception {
+        dc.delete(id);
+    }
+    
+    public void doneConsult(String id) {
+        
+    }
+
+    private boolean checkFields(String patientName, String hospitalName, Date consultationDate) {
+        return patientName.length() <= 0 || hospitalName.length() <= 0 || String.valueOf(consultationDate).length() <= 0;
     }
 }

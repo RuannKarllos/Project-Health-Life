@@ -5,9 +5,9 @@
  */
 package br.com.healthylife.apresentation;
 
+import br.com.healthylife.controller.ControllerEmployee;
+import br.com.healthylife.entity.Employee;
 import br.com.healthylife.util.Constants;
-import br.com.healthylife.util.Wallpaper;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -22,19 +22,18 @@ import javax.swing.Timer;
  */
 public class MainScreenEmployee extends javax.swing.JFrame {
 
-    Wallpaper desktop;
-    
     public MainScreenEmployee() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         this.setTitle(Constants.FRAME_TITLE);
-        
+
         Date dateSystem = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         jLDate.setText(dateFormat.format(dateSystem));
-        
+
         Timer timer = new Timer(1000, new hora());
         timer.start();
+
     }
 
     /**
@@ -52,40 +51,35 @@ public class MainScreenEmployee extends javax.swing.JFrame {
         jLTimer = new javax.swing.JLabel();
         jLDate = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLName = new javax.swing.JLabel();
-        jLFunction = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuRegister = new javax.swing.JMenu();
         jNewClient = new javax.swing.JMenuItem();
         jNewMedic = new javax.swing.JMenuItem();
         jNewHospital = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem17 = new javax.swing.JMenuItem();
-        jMenuItem18 = new javax.swing.JMenuItem();
-        jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuUpdateClient = new javax.swing.JMenuItem();
+        jMenuUpdateMedic = new javax.swing.JMenuItem();
+        jMenuUpdateHospital = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem20 = new javax.swing.JMenuItem();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItem22 = new javax.swing.JMenuItem();
+        jMenuDeleteClient = new javax.swing.JMenuItem();
+        jMenuDeleteMedic = new javax.swing.JMenuItem();
+        jMenuDeleteHospital = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuMakeAppointment = new javax.swing.JMenuItem();
+        jMenuItemUpdateConsult = new javax.swing.JMenuItem();
+        jMenuItemCancelConsult = new javax.swing.JMenuItem();
         jMenuItemLeave = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuExhibitionClient = new javax.swing.JMenuItem();
+        jMenuExhibitionHospital = new javax.swing.JMenuItem();
+        jMenuExhibtionMedic = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItemExhibitionConsult = new javax.swing.JMenuItem();
+        jMenuItemExhibitionConsultDone = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMInvoice = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItem15 = new javax.swing.JMenuItem();
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuAbout = new javax.swing.JMenuItem();
 
@@ -110,30 +104,20 @@ public class MainScreenEmployee extends javax.swing.JFrame {
         jLDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLDate.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
-        jLabel1.setText("Nome: ");
-
-        jLabel2.setText("Função: ");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        jLabel1.setText("Healthy Life  - \"Tecnologia inovadora para ajudar seu dia - a - dia\"");
 
         jDesktopPane2.setLayer(jLTimer, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLDate, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane2.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(jLName, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane2.setLayer(jLFunction, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
         jDesktopPane2.setLayout(jDesktopPane2Layout);
         jDesktopPane2Layout.setHorizontalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLFunction, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLTimer, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,19 +127,11 @@ public class MainScreenEmployee extends javax.swing.JFrame {
         jDesktopPane2Layout.setVerticalGroup(
             jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDesktopPane2Layout.createSequentialGroup()
-                        .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1)
-                            .addComponent(jLName, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(jLFunction, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                        .addComponent(jLTimer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(jLTimer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -172,7 +148,7 @@ public class MainScreenEmployee extends javax.swing.JFrame {
 
         jMenu1.setText("Arquivo");
 
-        jMenu3.setText("Novo Cadastro");
+        jMenuRegister.setText("Novo Cadastro");
 
         jNewClient.setText("Clientes");
         jNewClient.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +156,7 @@ public class MainScreenEmployee extends javax.swing.JFrame {
                 jNewClientActionPerformed(evt);
             }
         });
-        jMenu3.add(jNewClient);
+        jMenuRegister.add(jNewClient);
 
         jNewMedic.setText("Médicos");
         jNewMedic.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +164,7 @@ public class MainScreenEmployee extends javax.swing.JFrame {
                 jNewMedicActionPerformed(evt);
             }
         });
-        jMenu3.add(jNewMedic);
+        jMenuRegister.add(jNewMedic);
 
         jNewHospital.setText("Hospitais");
         jNewHospital.addActionListener(new java.awt.event.ActionListener() {
@@ -196,45 +172,90 @@ public class MainScreenEmployee extends javax.swing.JFrame {
                 jNewHospitalActionPerformed(evt);
             }
         });
-        jMenu3.add(jNewHospital);
+        jMenuRegister.add(jNewHospital);
 
-        jMenu1.add(jMenu3);
+        jMenu1.add(jMenuRegister);
 
         jMenu4.setText("Editar Cadastro");
 
-        jMenuItem17.setText("Clientes");
-        jMenu4.add(jMenuItem17);
+        jMenuUpdateClient.setText("Clientes");
+        jMenuUpdateClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuUpdateClientActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuUpdateClient);
 
-        jMenuItem18.setText("Médicos");
-        jMenu4.add(jMenuItem18);
+        jMenuUpdateMedic.setText("Médicos");
+        jMenuUpdateMedic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuUpdateMedicActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuUpdateMedic);
 
-        jMenuItem19.setText("Hospitais");
-        jMenu4.add(jMenuItem19);
+        jMenuUpdateHospital.setText("Hospitais");
+        jMenuUpdateHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuUpdateHospitalActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuUpdateHospital);
 
         jMenu1.add(jMenu4);
 
         jMenu5.setText("Excluir");
 
-        jMenuItem20.setText("Cliente");
-        jMenu5.add(jMenuItem20);
+        jMenuDeleteClient.setText("Cliente");
+        jMenuDeleteClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDeleteClientActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuDeleteClient);
 
-        jMenuItem21.setText("Médico");
-        jMenu5.add(jMenuItem21);
+        jMenuDeleteMedic.setText("Médico");
+        jMenuDeleteMedic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDeleteMedicActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuDeleteMedic);
 
-        jMenuItem22.setText("Hospital");
-        jMenu5.add(jMenuItem22);
+        jMenuDeleteHospital.setText("Hospital");
+        jMenuDeleteHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuDeleteHospitalActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuDeleteHospital);
 
         jMenu1.add(jMenu5);
         jMenu1.add(jSeparator1);
 
-        jMenuItem4.setText("Marcar Consulta");
-        jMenu1.add(jMenuItem4);
+        jMenuMakeAppointment.setText("Marcar Consulta");
+        jMenuMakeAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuMakeAppointmentActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuMakeAppointment);
 
-        jMenuItem5.setText("Remarcar Consulta");
-        jMenu1.add(jMenuItem5);
+        jMenuItemUpdateConsult.setText("Remarcar Consulta");
+        jMenuItemUpdateConsult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemUpdateConsultActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemUpdateConsult);
 
-        jMenuItem6.setText("Cancelar Consulta");
-        jMenu1.add(jMenuItem6);
+        jMenuItemCancelConsult.setText("Cancelar Consulta");
+        jMenuItemCancelConsult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCancelConsultActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemCancelConsult);
 
         jMenuItemLeave.setText("Sair");
         jMenuItemLeave.addActionListener(new java.awt.event.ActionListener() {
@@ -248,24 +269,46 @@ public class MainScreenEmployee extends javax.swing.JFrame {
 
         jMenu2.setText("Exibir");
 
-        jMenuItem8.setText("Clientes");
-        jMenu2.add(jMenuItem8);
+        jMenuExhibitionClient.setText("Clientes");
+        jMenuExhibitionClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuExhibitionClientActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuExhibitionClient);
 
-        jMenuItem9.setText("Hospitais");
-        jMenu2.add(jMenuItem9);
+        jMenuExhibitionHospital.setText("Hospitais");
+        jMenuExhibitionHospital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuExhibitionHospitalActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuExhibitionHospital);
 
-        jMenuItem10.setText("Médicos");
-        jMenu2.add(jMenuItem10);
+        jMenuExhibtionMedic.setText("Médicos");
+        jMenuExhibtionMedic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuExhibtionMedicActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuExhibtionMedic);
         jMenu2.add(jSeparator2);
 
-        jMenuItem11.setText("Consultas Marcadas");
-        jMenu2.add(jMenuItem11);
+        jMenuItemExhibitionConsult.setText("Consultas Marcadas");
+        jMenuItemExhibitionConsult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExhibitionConsultActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemExhibitionConsult);
 
-        jMenuItem12.setText("Consultas Efetuadas");
-        jMenu2.add(jMenuItem12);
-
-        jMenuItem14.setText("Consulta Canceladas");
-        jMenu2.add(jMenuItem14);
+        jMenuItemExhibitionConsultDone.setText("Consultas Efetuadas");
+        jMenuItemExhibitionConsultDone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemExhibitionConsultDoneActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemExhibitionConsultDone);
         jMenu2.add(jSeparator3);
 
         jMInvoice.setText("Boleto");
@@ -279,9 +322,6 @@ public class MainScreenEmployee extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu6.setText("Ajuda");
-
-        jMenuItem15.setText("Página de Ajuda");
-        jMenu6.add(jMenuItem15);
         jMenu6.add(jSeparator4);
 
         jMenuAbout.setText("Sobre");
@@ -317,19 +357,19 @@ public class MainScreenEmployee extends javax.swing.JFrame {
 
     private void jMenuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAboutActionPerformed
         JOptionPane.showMessageDialog(this, Constants.ABOUT_MESSAGE, Constants.FRAME_TITLE,
-            JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuAboutActionPerformed
 
     private void jMenuItemLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLeaveActionPerformed
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jMenuItemLeaveActionPerformed
 
     private void jNewClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNewClientActionPerformed
-       jDesktopPane1.add(new RegistrationScreenClientIF()).setVisible(true);
+        jDesktopPane1.add(new RegistrationScreenClientIF()).setVisible(true);
     }//GEN-LAST:event_jNewClientActionPerformed
 
     private void jNewMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNewMedicActionPerformed
-       jDesktopPane1.add(new RegistrationScreenMedicIF()).setVisible(true);
+        jDesktopPane1.add(new RegistrationScreenMedicIF()).setVisible(true);
     }//GEN-LAST:event_jNewMedicActionPerformed
 
     private void jNewHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jNewHospitalActionPerformed
@@ -340,41 +380,92 @@ public class MainScreenEmployee extends javax.swing.JFrame {
         jDesktopPane1.add(new ExhibitionInvoiceIF()).setVisible(true);
     }//GEN-LAST:event_jMInvoiceActionPerformed
 
+    private void jMenuUpdateClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUpdateClientActionPerformed
+        jDesktopPane1.add(new UpdateClientIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuUpdateClientActionPerformed
+
+    private void jMenuUpdateMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUpdateMedicActionPerformed
+        jDesktopPane1.add(new UpdateMedicIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuUpdateMedicActionPerformed
+
+    private void jMenuUpdateHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuUpdateHospitalActionPerformed
+        jDesktopPane1.add(new UpdateHospitalIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuUpdateHospitalActionPerformed
+
+    private void jMenuDeleteClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeleteClientActionPerformed
+       jDesktopPane1.add(new DeleteClientIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuDeleteClientActionPerformed
+
+    private void jMenuDeleteMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeleteMedicActionPerformed
+       jDesktopPane1.add(new DeleteMedicIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuDeleteMedicActionPerformed
+
+    private void jMenuDeleteHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuDeleteHospitalActionPerformed
+        jDesktopPane1.add(new DeleteHospitalIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuDeleteHospitalActionPerformed
+
+    private void jMenuMakeAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMakeAppointmentActionPerformed
+       jDesktopPane1.add(new MakeAnAppointmentScreenIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuMakeAppointmentActionPerformed
+
+    private void jMenuItemUpdateConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateConsultActionPerformed
+        jDesktopPane1.add(new UpdateConsultIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuItemUpdateConsultActionPerformed
+
+    private void jMenuItemCancelConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCancelConsultActionPerformed
+        jDesktopPane1.add(new CancelConsultIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuItemCancelConsultActionPerformed
+
+    private void jMenuExhibitionClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuExhibitionClientActionPerformed
+        jDesktopPane1.add(new ExhibitionClientIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuExhibitionClientActionPerformed
+
+    private void jMenuExhibitionHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuExhibitionHospitalActionPerformed
+        jDesktopPane1.add(new ExhibitionHospitalIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuExhibitionHospitalActionPerformed
+
+    private void jMenuExhibtionMedicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuExhibtionMedicActionPerformed
+        jDesktopPane1.add(new ExhibitionMedicalIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuExhibtionMedicActionPerformed
+
+    private void jMenuItemExhibitionConsultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExhibitionConsultActionPerformed
+        jDesktopPane1.add(new ExhibitionConsultIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuItemExhibitionConsultActionPerformed
+
+    private void jMenuItemExhibitionConsultDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemExhibitionConsultDoneActionPerformed
+        jDesktopPane1.add(new ExhibitionConsultDoneIF()).setVisible(true);
+    }//GEN-LAST:event_jMenuItemExhibitionConsultDoneActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JLabel jLDate;
-    private javax.swing.JLabel jLFunction;
-    private javax.swing.JLabel jLName;
     private javax.swing.JLabel jLTimer;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuItem jMInvoice;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuItem jMenuAbout;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem17;
-    private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem21;
-    private javax.swing.JMenuItem jMenuItem22;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuItem jMenuDeleteClient;
+    private javax.swing.JMenuItem jMenuDeleteHospital;
+    private javax.swing.JMenuItem jMenuDeleteMedic;
+    private javax.swing.JMenuItem jMenuExhibitionClient;
+    private javax.swing.JMenuItem jMenuExhibitionHospital;
+    private javax.swing.JMenuItem jMenuExhibtionMedic;
+    private javax.swing.JMenuItem jMenuItemCancelConsult;
+    private javax.swing.JMenuItem jMenuItemExhibitionConsult;
+    private javax.swing.JMenuItem jMenuItemExhibitionConsultDone;
     private javax.swing.JMenuItem jMenuItemLeave;
+    private javax.swing.JMenuItem jMenuItemUpdateConsult;
+    private javax.swing.JMenuItem jMenuMakeAppointment;
+    private javax.swing.JMenu jMenuRegister;
+    private javax.swing.JMenuItem jMenuUpdateClient;
+    private javax.swing.JMenuItem jMenuUpdateHospital;
+    private javax.swing.JMenuItem jMenuUpdateMedic;
     private javax.swing.JMenuItem jNewClient;
     private javax.swing.JMenuItem jNewHospital;
     private javax.swing.JMenuItem jNewMedic;
@@ -392,7 +483,7 @@ public class MainScreenEmployee extends javax.swing.JFrame {
             Calendar now = Calendar.getInstance();
             jLTimer.setText(String.format("%1$tH:%1$tM:%1$tS", now));
         }
-        
+
     }
-    
+
 }

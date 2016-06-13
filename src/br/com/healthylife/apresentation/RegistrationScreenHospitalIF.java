@@ -5,7 +5,9 @@
  */
 package br.com.healthylife.apresentation;
 
+import br.com.healthylife.controller.ControllerHospital;
 import br.com.healthylife.util.Constants;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +41,7 @@ public class RegistrationScreenHospitalIF extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jTName = new javax.swing.JTextField();
         jTAdress = new javax.swing.JTextField();
-        jTNeighborhood = new javax.swing.JTextField();
+        jTDistrict = new javax.swing.JTextField();
         jTCodeNumber = new javax.swing.JTextField();
         jTCity = new javax.swing.JTextField();
         jButtonLeave = new javax.swing.JButton();
@@ -80,6 +82,11 @@ public class RegistrationScreenHospitalIF extends javax.swing.JInternalFrame {
         });
 
         jButtonRegistration.setText("Cadastrar");
+        jButtonRegistration.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrationActionPerformed(evt);
+            }
+        });
 
         jButtonNew.setText("Novo");
         jButtonNew.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +121,7 @@ public class RegistrationScreenHospitalIF extends javax.swing.JInternalFrame {
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addComponent(jLabel4)
                                             .addGap(109, 109, 109))
-                                        .addComponent(jTNeighborhood, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jTDistrict, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel5)
                             .addComponent(jTCity, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -146,7 +153,7 @@ public class RegistrationScreenHospitalIF extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(9, 9, 9)
-                        .addComponent(jTNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(10, 10, 10)
@@ -168,13 +175,35 @@ public class RegistrationScreenHospitalIF extends javax.swing.JInternalFrame {
         jTCodeNumber.setText("");
         jTCity.setText("");
         jTAdress.setText("");
-        jTNeighborhood.setText("");
-        
+        jTDistrict.setText("");
+
     }//GEN-LAST:event_jButtonNewActionPerformed
 
     private void jButtonLeaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLeaveActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButtonLeaveActionPerformed
+
+    private void jButtonRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrationActionPerformed
+        try {
+            String name = jTName.getText();
+            String cod = jTCodeNumber.getText();
+            String city = jTCity.getText();
+            String adress = jTAdress.getText();
+            String district = jTDistrict.getText();
+
+            ControllerHospital ch = new ControllerHospital();
+
+            ch.register(cod, name, adress, district, city);
+
+            JOptionPane.showMessageDialog(this, Constants.REGISTER_DONE);
+            this.dispose();
+
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, Constants.REGISTER_ERRO_USER);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_jButtonRegistrationActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -190,8 +219,8 @@ public class RegistrationScreenHospitalIF extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTAdress;
     private javax.swing.JTextField jTCity;
     private javax.swing.JTextField jTCodeNumber;
+    private javax.swing.JTextField jTDistrict;
     private javax.swing.JTextField jTName;
-    private javax.swing.JTextField jTNeighborhood;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

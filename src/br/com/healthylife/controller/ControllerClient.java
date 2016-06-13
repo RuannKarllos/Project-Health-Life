@@ -5,6 +5,7 @@
  */
 package br.com.healthylife.controller;
 
+import br.com.healthylife.apresentation.Login;
 import br.com.healthylife.apresentation.MainScreenClient;
 import br.com.healthylife.dao.IDao;
 import br.com.healthylife.entity.Client;
@@ -20,24 +21,25 @@ import java.io.ObjectInputStream;
  * @author ruann
  */
 public class ControllerClient {
-    
+
     IDao<Client> dc = Factory.getDao(Client.class);
-    MainScreenClient msC = new MainScreenClient();
-    
+    MainScreenClient msC;
+    Login l = new Login();
+
     public void registerClient(String name, String CPF, int age, String sex, String email, String phoneNumber, String date, String password) {
         Client c = new Client(name, CPF, age, sex, email, phoneNumber, date, password);
-        
+
         if (age < 0) {
             throw new NumberFormatException("Não são aceitos números nagativos!");
         }
-        
+
         dc.insert(c);
-        
+
     }
-    
+
     public boolean checkLogin(String login, String password) throws FileNotFoundException, IOException, ClassNotFoundException {
-        
-        String folder = "\\Projeto\\Client";
+
+        String folder = "Client";
 
         File file = new File(folder, login + ".data");
 
@@ -49,19 +51,32 @@ public class ControllerClient {
             Client client = (Client) ois.readObject();
 
             if (password.equals(client.getPassword())) {
+                
+                msC = new MainScreenClient();
+                
                 msC.setVisible(true);
+                
                 return true;
             }
-        } 
-        
+        }
+
         return false;
     }
-    
+
     public void update(String name, String CPF, int age, String sex, String email, String phoneNumber, String date, String password) {
         Client c = new Client(name, CPF, age, sex, email, phoneNumber, date, password);
-        
+
         if (age < 0) {
             throw new NumberFormatException("Não são aceitos números nagativos!");
         }
-    }    
+    }
+
+    public void delete(String id) throws Exception {
+       dc.delete(id);
+    }
+    
+    public Client search(String id) {
+        return (Client) dc.search(id);
+    }
+
 }

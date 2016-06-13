@@ -226,7 +226,14 @@ public class RegistrationScreenClientIF extends javax.swing.JInternalFrame {
         try {
 
             String name = jTName.getText();
-            int age = Integer.parseInt(jTAge.getText());
+            
+            int age = 0;
+            if (jTAge.getText().length() > 0) {
+                age = Integer.parseInt(jTAge.getText());
+            } else {
+                throw new NumberFormatException("Campos vazios ou preenchidos incorretamentes!");
+            }
+            
             String CPF = jTCPF.getText();
             String email = jTEmail.getText();
             String sex = jComboBoxSex.getItemAt(jComboBoxSex.getSelectedIndex());
@@ -248,7 +255,7 @@ public class RegistrationScreenClientIF extends javax.swing.JInternalFrame {
             this.dispose();
             
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, e.toString());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "Verifique se todos os campos estão preenchidos!");
         }

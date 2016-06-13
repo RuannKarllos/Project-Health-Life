@@ -8,6 +8,7 @@ package br.com.healthylife.apresentation;
 import br.com.healthylife.controller.ControllerAdm;
 import br.com.healthylife.controller.ControllerClient;
 import br.com.healthylife.controller.ControllerEmployee;
+import br.com.healthylife.entity.Client;
 import br.com.healthylife.util.Constants;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -43,7 +44,7 @@ public class Login extends javax.swing.JFrame {
         jPassword_Text = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Healthy Life Program");
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -135,7 +136,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLRegisterMousePressed
 
     private void leaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaveActionPerformed
-       this.dispose();
+       System.exit(0);
     }//GEN-LAST:event_leaveActionPerformed
 
     private void get_InActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_get_InActionPerformed
@@ -203,6 +204,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
+    
+    static public Client c;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton get_In;

@@ -5,26 +5,25 @@
  */
 package br.com.healthylife.apresentation;
 
+import br.com.healthylife.controller.ControllerHospital;
 import br.com.healthylife.dao.IDao;
 import br.com.healthylife.entity.Hospital;
-import br.com.healthylife.util.Constants;
 import br.com.healthylife.util.Factory;
 import java.io.File;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ruann
  */
-public class ExhibitionHospitalIF extends javax.swing.JInternalFrame {
+public class DeleteHospitalIF extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form ExhibitionHospitalIF
+     * Creates new form DeleteHospitalIF
      */
-    public ExhibitionHospitalIF() {
+    public DeleteHospitalIF() {
         initComponents();
-        this.setTitle(Constants.EXHIBITION_HOSPITAL_TITLE);
-        
         setList();
     }
 
@@ -40,6 +39,7 @@ public class ExhibitionHospitalIF extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHospital = new javax.swing.JTable();
         jButtonExit = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -50,15 +50,22 @@ public class ExhibitionHospitalIF extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Código", "Nome", "Cidade", "Bairro"
+                "Código", "Nome"
             }
         ));
         jScrollPane1.setViewportView(jTableHospital);
 
-        jButtonExit.setText("OK");
+        jButtonExit.setText("Sair");
         jButtonExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonExitActionPerformed(evt);
+            }
+        });
+
+        jButtonDelete.setText("Apagar");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
             }
         });
 
@@ -70,11 +77,13 @@ public class ExhibitionHospitalIF extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(274, 274, 274)
+                        .addGap(140, 140, 140)
+                        .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonExit, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,45 +91,63 @@ public class ExhibitionHospitalIF extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonExit)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonExit)
+                    .addComponent(jButtonDelete))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        setBounds(425, 80, 647, 413);
+        setBounds(425, 80, 487, 408);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+
+        try {
+            ControllerHospital dh = new ControllerHospital();
+            
+            dh.delete(jTableHospital.getValueAt(jTableHospital.getSelectedRow(), 0).toString());
+            
+            JOptionPane.showMessageDialog(this, "Excluido com sucesso!");
+            this.dispose();
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.toString());
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jButtonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExitActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonExitActionPerformed
 
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonExit;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableHospital;
+    // End of variables declaration//GEN-END:variables
+
     private void setList() {
-        
+
         try {
             File file = new File("Hospital");
             File fileList[] = file.listFiles();
-            
+
             IDao<Hospital> dh = Factory.getDao(Hospital.class);
-            
+
             for (int i = 0; i < fileList.length; i++) {
-                
+
                 Hospital h = (Hospital) dh.search(fileList[i].getName());
-                
+
                 DefaultTableModel hTable = (DefaultTableModel) jTableHospital.getModel();
-                
+
                 hTable.addRow(new String[]{
                     h.getID(), h.getName()
                 });
-                
+
             }
         } catch (NullPointerException e) {
             //TODO
         }
     }
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonExit;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableHospital;
-    // End of variables declaration//GEN-END:variables
 }

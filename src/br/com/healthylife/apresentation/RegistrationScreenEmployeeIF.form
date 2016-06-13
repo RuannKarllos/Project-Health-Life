@@ -54,7 +54,7 @@
                               <Component id="jTAge" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jComboBoxSex" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="jComboBoxSex" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -112,7 +112,7 @@
                       <Component id="jPassword" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="57" max="32767" attributes="0"/>
+              <EmptySpace pref="61" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonNew" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonRegister" alignment="3" min="-2" max="-2" attributes="0"/>

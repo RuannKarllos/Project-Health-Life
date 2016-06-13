@@ -6,8 +6,7 @@
 package br.com.healthylife.apresentation;
 
 import br.com.healthylife.dao.IDao;
-import br.com.healthylife.entity.Client;
-import br.com.healthylife.util.Constants;
+import br.com.healthylife.entity.Consultation;
 import br.com.healthylife.util.Factory;
 import java.io.File;
 import javax.swing.table.DefaultTableModel;
@@ -16,14 +15,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ruann
  */
-public class ExhibitionClientIF extends javax.swing.JInternalFrame {
+public class ExhibitionConsultDoneIF extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form ExhibitionClientIF
+     * Creates new form ExhibitionConsultDoneIF
      */
-    public ExhibitionClientIF() {
+    public ExhibitionConsultDoneIF() {
         initComponents();
-        this.setTitle(Constants.EXHIBITION_CLIENT_TITLE);
         setList();
     }
 
@@ -36,31 +34,29 @@ public class ExhibitionClientIF extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBOk = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
-        setTitle(Constants.EXHIBITION_CLIENT_TITLE);
 
-        jBOk.setText("OK");
-        jBOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBOkActionPerformed(evt);
-            }
-        });
-
-        jTable1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "CPF", "Idade", "Telefone", "Email", "Senha"
+                "Paciente", "Hospital", "Data"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        jButton1.setText("OK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,56 +65,55 @@ public class ExhibitionClientIF extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(357, 357, 357)
-                        .addComponent(jBOk, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addGap(191, 191, 191)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jBOk)
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jButton1)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        setBounds(425, 80, 861, 479);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOkActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jBOkActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBOk;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
     private void setList() {
-        try {
-            File file = new File("Client");
+       try {
+            File file = new File("ConsultationDone");
             File fileList[] = file.listFiles();
 
-            IDao<Client> dc = Factory.getDao(Client.class);
+            IDao<Consultation> dc = Factory.getDao(Consultation.class);
 
             for (int i = 0; i < fileList.length; i++) {
 
-                Client c = (Client) dc.search(fileList[i].getName());
+                Consultation c = (Consultation) dc.search(fileList[i].getName());
 
-                DefaultTableModel clientList = (DefaultTableModel) jTable1.getModel();
+                DefaultTableModel employeeList = (DefaultTableModel) jTable1.getModel();
 
-                clientList.addRow(new String[]{
-                    c.getName(), c.getCPF(), String.valueOf(c.getAge()), c.getPhoneNumber()
+                employeeList.addRow(new String[]{
+                    c.getPatientName(), c.getHospitalName(), String.valueOf(c.getConsultationDate())
                 });
             }
-
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ex) {
             //TODO
         }
     }
